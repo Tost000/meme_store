@@ -1,3 +1,6 @@
+const productPrice = document.getElementById("product-price");
+const span = document.createElement("span");
+
 function addToCart(productName, productPrice) {
   let cart = JSON.parse(localStorage.getItem("cart")) || [];
   cart.push({ name: productName, price: productPrice });
@@ -18,10 +21,12 @@ function loadProduct() {
   if (product) {
     document.getElementById("product-name").textContent = product.name;
     document.getElementById("product-image").src = product.image;
-    document.getElementById("product-price").textContent =
-      product.price + " руб.";
+    productPrice.textContent = product.price;
+    span.textContent = "руб.";
+    document.getElementById("counter-box").append(span);
+
     document.getElementById("add-to-cart-btn").onclick = () =>
-      addToCart(product.name, product.price);
+      addToCart(product.name, +productPrice.textContent);
   }
 }
 
