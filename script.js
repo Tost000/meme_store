@@ -67,17 +67,19 @@ const prise = document.getElementById("product-price");
 const value = document.getElementById("value");
 const gb256 = document.getElementById("256");
 const gb512 = document.getElementById("512");
-let memePrice = Number(
-  JSON.parse(localStorage.getItem("currentProduct.price"))
-);
 
 function increment() {
   let result = Number(value.textContent) + 1;
   value.textContent = result;
   if (gb512.classList.contains("active")) {
-    var priseIphone = Number(prise.textContent) + memePrice + 200;
+    var priseIphone =
+      Number(prise.textContent) +
+      JSON.parse(localStorage.getItem("currentProduct")).price +
+      200;
   } else {
-    var priseIphone = Number(prise.textContent) + memePrice;
+    var priseIphone =
+      Number(prise.textContent) +
+      JSON.parse(localStorage.getItem("currentProduct")).price;
   }
   prise.textContent = priseIphone;
 }
@@ -89,9 +91,14 @@ function decrement() {
     increment();
   }
   if (gb512.classList.contains("active")) {
-    var priseIphone = Number(prise.textContent) - memePrice - 200;
+    var priseIphone =
+      Number(prise.textContent) -
+      JSON.parse(localStorage.getItem("currentProduct")).price -
+      200;
   } else {
-    var priseIphone = Number(prise.textContent) - memePrice;
+    var priseIphone =
+      Number(prise.textContent) -
+      JSON.parse(localStorage.getItem("currentProduct")).price;
   }
   prise.textContent = priseIphone;
 }
@@ -99,14 +106,15 @@ function decrement() {
 function gb256Size() {
   gb512.classList.remove("active");
   gb256.classList.add("active");
-  prise.textContent = memePrice;
+  prise.textContent = JSON.parse(localStorage.getItem("currentProduct")).price;
   value.textContent = 1;
 }
 
 function gb512Size() {
   gb256.classList.remove("active");
   gb512.classList.add("active");
-  prise.textContent = memePrice + 200;
+  prise.textContent =
+    JSON.parse(localStorage.getItem("currentProduct")).price + 200;
   value.textContent = 1;
 }
 
